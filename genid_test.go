@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	eightid "github.com/chi07/eight-id-go"
+	eightid "github.com/chi07/eight-id-go/v2"
 )
 
 func TestGenerateID_UniqueAndValidFormat(t *testing.T) {
@@ -116,21 +116,21 @@ func TestID_IsUniqueInParallel(t *testing.T) {
 }
 
 func BenchmarkNew(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_ = eightid.New()
 	}
 }
 
 func BenchmarkIsValid(b *testing.B) {
 	id := eightid.New()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_ = eightid.IsValid(id)
 	}
 }
 
 func BenchmarkNewWithTime(b *testing.B) {
 	ts := time.Date(2026, time.January, 2, 3, 4, 5, 0, time.UTC)
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_ = eightid.NewWithTime(ts)
 	}
 }

@@ -18,12 +18,11 @@ const (
 
 const charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
+// state packs the last issued (tick, sequence) into a single word:
+// [ tick : sequence ] with sequenceWidth*6 bits of sequence. It starts at 0
+// and is seeded lazily by the first New() call — nextState treats a zero
+// state as "no ID issued yet" and assigns the current tick with seq 0.
 var state atomic.Uint64
-
-func init() {
-	now := currentTick()
-	state.Store(now << stateShift)
-}
 
 func currentTick() uint64 {
 	return tickFromUnixMilli(time.Now().UnixMilli())
