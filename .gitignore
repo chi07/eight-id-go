@@ -24,3 +24,24 @@ go.work.sum
 # env file
 .env
 .idea/.DS_Store
+
+# standard ignores
+coverage.*
+*.env
+env.fix
+dev.sh
+local.sh
+dev.local.sh
+.idea/
+.vscode/
+.qwen/
+*.iml
+.DS_Store
+Thumbs.db
+vendor/
+.gocache/
+.gomodcache/
+bin/
+dist/
+build/
+*.log
